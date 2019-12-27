@@ -8,10 +8,7 @@ const port = process.env.port || 3000;
 const app = express();
 
 hbs.registerPartials(__dirname + '/views/partials')
-hbs.registerHelper('date', ()=> new Date().getFullYear())
 app.set('view engine', 'hbs');
-
-app.use(express.static(__dirname+'/public'))
 
 app.use((req,res, next) => {
     console.log('yes i am rrunning')
@@ -25,6 +22,11 @@ app.use((req,res, next) => {
    
     next();
 })
+
+
+app.use(express.static(__dirname+'/public'));
+
+hbs.registerHelper('date', ()=> new Date().getFullYear());
 
 app.get('/',(req,res,next) => {
 
